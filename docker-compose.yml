@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  db:
+    image: mariadb
+    restart: always
+    # 文字コードを日本語向けに指定
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./docker/db/data:/var/lib/mysql
+      - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/db/sql:/docker-entrypoint-initdb.d
+    environment:
+      # .envにて定義した環境変数を使用
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - TZ=${TZ}
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

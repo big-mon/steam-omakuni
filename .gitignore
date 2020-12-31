@@ -1,0 +1,5 @@
+# 非Git管理の環境変数
+.env
+
+# DBデータ
+/docker/db/data
