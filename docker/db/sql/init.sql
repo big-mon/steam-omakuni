@@ -23,7 +23,7 @@ CREATE TABLE developers (
   `appid` VARCHAR(16) NOT NULL
   ,`name` VARCHAR(200) NOT NULL
   ,`update_time` TIMESTAMP
-  ,FOREIGN KEY (`appid`) REFERENCES apps(`appid`)
+  ,FOREIGN KEY (`appid`) REFERENCES apps(`appid`) ON DELETE CASCADE ON UPDATE CASCADE
   ,PRIMARY KEY(`appid`, `name`)
   ,INDEX `index_name` (`name`)
 );
@@ -34,7 +34,7 @@ CREATE TABLE publishers (
   `appid` VARCHAR(16) NOT NULL
   ,`name` VARCHAR(200) NOT NULL
   ,`update_time` TIMESTAMP
-  ,FOREIGN KEY (`appid`) REFERENCES apps(`appid`)
+  ,FOREIGN KEY (`appid`) REFERENCES apps(`appid`) ON DELETE CASCADE ON UPDATE CASCADE
   ,PRIMARY KEY(`appid`, `name`)
   ,INDEX `index_name` (`name`)
 );
@@ -45,7 +45,7 @@ CREATE TABLE languages (
   `appid` VARCHAR(16) NOT NULL
   ,`name` VARCHAR(200) NOT NULL
   ,`update_time` TIMESTAMP
-  ,FOREIGN KEY (`appid`) REFERENCES apps(`appid`)
+  ,FOREIGN KEY (`appid`) REFERENCES apps(`appid`) ON DELETE CASCADE ON UPDATE CASCADE
   ,PRIMARY KEY(`appid`, `name`)
   ,INDEX `index_name` (`name`)
 );
@@ -59,7 +59,7 @@ CREATE TABLE prices (
   ,`final` DECIMAL(10, 2) UNSIGNED NOT NULL
   ,`discount_percent` TINYINT
   ,`update_time` TIMESTAMP
-  ,FOREIGN KEY (`appid`) REFERENCES apps(`appid`)
+  ,FOREIGN KEY (`appid`) REFERENCES apps(`appid`) ON DELETE CASCADE ON UPDATE CASCADE
   ,PRIMARY KEY(`appid`, `currency`)
   ,INDEX `index_currency` (`currency`)
   ,INDEX `index_discount` (`discount_percent`)
@@ -72,7 +72,7 @@ CREATE TABLE genres (
   ,`appid` VARCHAR(16) NOT NULL
   ,`name` VARCHAR(20) NOT NULL
   ,`update_time` TIMESTAMP
-  ,FOREIGN KEY (`appid`) REFERENCES apps(`appid`)
+  ,FOREIGN KEY (`appid`) REFERENCES apps(`appid`) ON DELETE CASCADE ON UPDATE CASCADE
   ,PRIMARY KEY (`id`, `appid`)
   ,INDEX `index_appid` (`appid`)
   ,INDEX `index_name` (`name`)
@@ -85,7 +85,7 @@ CREATE TABLE releases (
   ,`comming_soon` BOOL
   ,`date` DATE NOT NULL
   ,`update_time` TIMESTAMP
-  ,FOREIGN KEY (`appid`) REFERENCES apps(`appid`)
+  ,FOREIGN KEY (`appid`) REFERENCES apps(`appid`) ON DELETE CASCADE ON UPDATE CASCADE
   ,PRIMARY KEY (`appid`)
   ,INDEX `index_comming` (`comming_soon`)
   ,INDEX `index_date` (`date`)
