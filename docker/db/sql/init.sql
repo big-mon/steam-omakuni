@@ -6,7 +6,7 @@ USE steamdata;
 -- apps を作成
 DROP TABLE IF EXISTS apps;
 CREATE TABLE apps (
-  `appid` VARCHAR(16) NOT NULL
+  `appid` INT UNSIGNED
   ,`name` VARCHAR(400) NOT NULL
   ,`type` VARCHAR(16) NOT NULL
   ,`recommendations` INT UNSIGNED
@@ -20,7 +20,7 @@ CREATE TABLE apps (
 -- developers を作成
 DROP TABLE IF EXISTS developers;
 CREATE TABLE developers (
-  `appid` VARCHAR(16) NOT NULL
+  `appid` INT UNSIGNED
   ,`name` VARCHAR(200) NOT NULL
   ,`update_time` TIMESTAMP
   ,FOREIGN KEY (`appid`) REFERENCES apps(`appid`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -31,7 +31,7 @@ CREATE TABLE developers (
 -- publishers を作成
 DROP TABLE IF EXISTS publishers;
 CREATE TABLE publishers (
-  `appid` VARCHAR(16) NOT NULL
+  `appid` INT UNSIGNED
   ,`name` VARCHAR(200) NOT NULL
   ,`update_time` TIMESTAMP
   ,FOREIGN KEY (`appid`) REFERENCES apps(`appid`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -42,7 +42,7 @@ CREATE TABLE publishers (
 -- languages を作成
 DROP TABLE IF EXISTS languages;
 CREATE TABLE languages (
-  `appid` VARCHAR(16) NOT NULL
+  `appid` INT UNSIGNED
   ,`name` VARCHAR(200) NOT NULL
   ,`update_time` TIMESTAMP
   ,FOREIGN KEY (`appid`) REFERENCES apps(`appid`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -53,7 +53,7 @@ CREATE TABLE languages (
 -- prices を作成
 DROP TABLE IF EXISTS prices;
 CREATE TABLE prices (
-  `appid` VARCHAR(16) NOT NULL
+  `appid` INT UNSIGNED
   ,`currency` VARCHAR(6) NOT NULL
   ,`initial` DECIMAL(10, 2) UNSIGNED NOT NULL
   ,`final` DECIMAL(10, 2) UNSIGNED NOT NULL
@@ -69,7 +69,7 @@ CREATE TABLE prices (
 DROP TABLE IF EXISTS genres;
 CREATE TABLE genres (
   `id` VARCHAR(3) NOT NULL
-  ,`appid` VARCHAR(16) NOT NULL
+  ,`appid` INT UNSIGNED
   ,`name` VARCHAR(20) NOT NULL
   ,`update_time` TIMESTAMP
   ,FOREIGN KEY (`appid`) REFERENCES apps(`appid`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -81,9 +81,9 @@ CREATE TABLE genres (
 -- releases を作成
 DROP TABLE IF EXISTS releases;
 CREATE TABLE releases (
-  `appid` VARCHAR(16)
+  `appid` INT UNSIGNED
   ,`comming_soon` BOOL
-  ,`date` DATE NOT NULL
+  ,`date` VARCHAR(40) NOT NULL
   ,`update_time` TIMESTAMP
   ,FOREIGN KEY (`appid`) REFERENCES apps(`appid`) ON DELETE CASCADE ON UPDATE CASCADE
   ,PRIMARY KEY (`appid`)
