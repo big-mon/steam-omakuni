@@ -2,6 +2,7 @@ version: '3.8'
 services:
   db:
     image: mariadb
+    container_name: db
     restart: always
     # 文字コードを日本語向けに指定
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
@@ -13,9 +14,12 @@ services:
       # .envにて定義した環境変数を使用
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - TZ=${TZ}
+    ports:
+      - "63306:3306"
 
   adminer:
     image: adminer
+    container_name: adminer
     restart: always
     ports:
       - 8080:8080
