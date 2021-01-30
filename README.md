@@ -1,5 +1,6 @@
 # Steam-Omakuni
-Steamの地域差を可視化
+
+Steam の地域差を可視化
 
 # Getting Started
 
@@ -20,3 +21,7 @@ echo "TZ='[YOUR_TIMEZONE]'" >> .env
 ```bash
 docker-compose up
 ```
+
+## Tips
+
+コンテナ間通信にて DB へ接続するためにはサーバー「db」、ポート「3306」を指定すればよい。

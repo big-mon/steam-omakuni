@@ -2,7 +2,7 @@ version: '3.8'
 services:
   db:
     image: mariadb
-    container_name: db
+    container_name: db_mariadb
     restart: always
     # 文字コードを日本語向けに指定
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
@@ -16,9 +16,6 @@ services:
       - TZ=${TZ}
     ports:
       - "63306:3306"
-    networks:
-      app-net:
-        ipv4_address: 172.30.0.2
 
   adminer:
     image: adminer
@@ -26,26 +23,12 @@ services:
     restart: always
     ports:
       - 8080:8080
-    networks:
-      app-net:
-        ipv4_address: 172.30.0.5
 
   console:
-    image: mcr.microsoft.com/dotnet/sdk:5.0
+    image: mcr.microsoft.com/dotnet/sdk:5.0.102-ca-patch-buster-slim
     container_name: console
     restart: always
     volumes:
       - ./docker/SteamDataCollector:/app
     command: dotnet run --project /app
-    networks:
-      app-net:
-        ipv4_address: 172.30.0.4
-
-networks:
-  app-net:
-    name: app-net
-    driver: bridge
-    ipam:
-     driver: default
-     config:
-       - subnet: 172.30.0.0/24
+    #tty: true
